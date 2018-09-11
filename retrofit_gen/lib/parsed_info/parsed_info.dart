@@ -139,10 +139,11 @@ class Req {
 class WriteInfo {
   final String name;
   final String basePath;
+  final Set<String> basePathParams;
   final Map<String, String> baseMetadata;
 
   final List<Req> requests;
 
-  WriteInfo(this.name, this.basePath, this.baseMetadata,
+  WriteInfo(this.name, this.basePath, this.basePathParams, this.baseMetadata,
       this.requests);
 }
