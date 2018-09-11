@@ -20,9 +20,10 @@ Req _parseReq(String httpMethod, DartObject annot, MethodElement method) {
 
   for (ParameterElement pe in method.parameters) {
     {
-      DartObject pathParam = isPathParam.firstAnnotationOfExact(pe);
-      if (pathParam != null) {
-        pathParams.add(pathParam.getField('alias').toStringValue() ?? pe.displayName);
+      DartObject pp = isPathParam.firstAnnotationOfExact(pe);
+      if (pp != null) {
+        pathParams[pp.getField('alias').toStringValue() ?? pe.displayName] =
+            pe.displayName;
       }
     }
 
