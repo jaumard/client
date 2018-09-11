@@ -42,14 +42,6 @@ class Writer {
       sb.write('.pathParams("$key", $valueField)');
     });
 
-    for (String path in i.basePathParams) {
-      r.pathParams.forEach((String key, String valueField) {
-        if(key == path) {
-          sb.write('.pathParams("$key", $valueField)');
-        }
-      });
-    }
-
     r.query.forEach((String key, String valueField) {
       sb.write('.query("$key", $valueField)');
     });
@@ -98,9 +90,14 @@ class Writer {
         sb.writeln('return req.list(convert: serializers.oneFrom);');
       } else if (r.result.isStringResponse) {
         sb.writeln('return req.go();');
+      } else if(r.result.isResultBuiltin) {
+        sb.writeln('return req.one();');
       } else {
         sb.writeln('return req.one(convert: serializers.oneFrom);');
       }
+    } else if (r.result.mapValueType != null) {
+      sb.writeln(
+          'return req.one().then((v) => serializers.mapFrom<${r.result.mapValueType}>(v));');
     } else {
       sb.writeln('return serializers.from(await req.go().body);');
     }

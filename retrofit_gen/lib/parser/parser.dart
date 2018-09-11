@@ -105,11 +105,6 @@ WriteInfo parse(ClassElement element, ConstantReader annotation) {
   final basePath = an.getField("path").toStringValue() ?? '';
   final baseMetadata = an.getField("metadata").toMapValue().map(
       (k, v) => MapEntry<String, String>(k.toStringValue(), toStringValue(v)));
-  final basePathParams = basePath
-      .split('/')
-      .where((p) => p.startsWith(':'))
-      .map((p) => p.substring(1))
-      .toSet();
 
   final reqs = <Req>[];
 
@@ -132,7 +127,7 @@ WriteInfo parse(ClassElement element, ConstantReader annotation) {
   }
 
   return WriteInfo(
-      element.displayName, basePath, basePathParams, baseMetadata, reqs);
+      element.displayName, basePath, baseMetadata, reqs);
 }
 
 String toStringValue(DartObject value) {
