@@ -16,7 +16,6 @@ const isPatchReq = const TypeChecker.fromRuntime(PatchReq);
 
 const isPathParam = const TypeChecker.fromRuntime(PathParam);
 const isQueryParam = const TypeChecker.fromRuntime(QueryParam);
-const isPathParam = const TypeChecker.fromRuntime(PathParam);
 const isQueryMap = const TypeChecker.fromRuntime(QueryMap);
 const isHeader = const TypeChecker.fromRuntime(Header);
 const isHeaderMap = const TypeChecker.fromRuntime(HeaderMap);
